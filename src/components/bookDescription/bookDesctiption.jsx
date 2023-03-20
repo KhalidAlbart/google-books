@@ -51,7 +51,9 @@ function BookDescription(props) {
                                     {description.volumeInfo?.['categories'].join(', ')}
                                 </Category> 
                             }
-                            <Flex column gap='md'
+                            <Flex 
+                                w='100%'
+                                column gap='md'
                                 initial={{ opacity: 0, translateY: '100%' }}
                                 animate={{ opacity: 1, translateY: 0 }}
                                 transition={{ duration: 0.4, ease: 'circOut' }}>

@@ -18,20 +18,28 @@ function Collection() {
     useEffect(() => {
         async function loadData() {
           await getBooksCollection(API_URL, title, startIndex, 30, sortby, cat, API_KEY)
-                  .then((result) => startIndex > 0 
-                                      ? dispatch(addCollection(preparingData(result)))
-                                      : dispatch(setCollection(preparingData(result))))
+                  .then((result) => dispatch(setCollection(preparingData(result))))
                   .catch(error => dispatch(deleteCollection()))
           
           await setIsLoading(false)
         }
 
         loadData()
-    }, [startIndex, title, sortby, cat])
+    }, [title, sortby, cat])
 
     const handlerClick = () => {
       setIsLoading(true)
       setStartIndex(collection.items.length - 1)
+
+      async function loadData() {
+        await getBooksCollection(API_URL, title, startIndex, 30, sortby, cat, API_KEY)
+                .then((result) => dispatch(addCollection(preparingData(result))))
+                .catch(error => dispatch(deleteCollection()))
+        
+        await setIsLoading(false)
+      }
+
+      loadData()
     }
 
     return (

@@ -37,11 +37,14 @@ export const Description = styled.div({
     color: Constant.color.dark,
     padding: Constant.indent.md,
     border: '1px solid ' + Constant.color.light,
-    borderRadius: '0.5rem'
+    borderRadius: '0.5rem',
+    width: '100%',
+    minHeight: '200px',
 })
 
 export const Flex = styled(motion.div)(props => ({
     display: 'flex',
+    width: props.w || 'auto',
     flexDirection: props.column ? 'column' : 'row',
     justifyContent: props.jContent || 'flex-start',
     alignItems: props.aItems || 'flex-start',

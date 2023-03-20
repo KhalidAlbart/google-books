@@ -1,9 +1,10 @@
 export function bookCollectionReducer(state = 0, action) {
     switch(action.type) {
         case "SET":
-            state = action.payload
-            return state
+            console.log('set')
+            return action.payload
         case "ADD":
+            console.log('add')
             return {
                 total: state.total,
                 items: [...state.items, ...action.payload.items]
