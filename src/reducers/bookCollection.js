@@ -4,9 +4,10 @@ export function bookCollectionReducer(state = 0, action) {
             state = action.payload
             return state
         case "ADD":
-            console.log(action.payload.items, state['items'])
-            state.items = [...state.items, ...action.payload.items]
-            return state
+            return {
+                total: state.total,
+                items: [...state.items, ...action.payload.items]
+            }
         case "DELETE":
             state = 0
             return state

@@ -12,7 +12,11 @@ function BookCard(props) {
     }
 
     return (
-        <Card onClick={ () => handlerClick(props.id) }>
+        <Card
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.25, ease: 'easeIn', delay: props.delay }}
+            onClick={ () => handlerClick(props.id) }>
             <Wrapper>
                 <Cover src={ props.cover?.["thumbnail"] || noCover } />
             </Wrapper>

@@ -31,13 +31,26 @@ export const Container = styled.div({
 
 export const Grid = styled.div({
     display: 'grid',
-    gridTemplateColumns: 'repeat(12, minmax(2rem, 1fr))',
+    gridTemplateColumns: 'repeat(12, minmax(1.25rem, 1fr))',
     placeItems: 'center',
     gap: Constant.indent.lg,
+
+    [`@media screen and (max-width: 800px)`]: {
+        gap: Constant.indent.md,
+    },
+
+    [`@media screen and (max-width: 546px)`]: {
+        gap: Constant.indent.sm,
+        gridRowGap: Constant.indent.lg
+    },
 })
 
 export const Title = styled.h1({
     gridColumn: 'span 12',
     fontSize: Constant.fontSize.xl,
     color: Constant.color.primary,
+
+    [`@media screen and (max-width: 546px)`]: {
+        fontSize: Constant.fontSize.lg,
+    },
 })

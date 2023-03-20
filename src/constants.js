@@ -19,4 +19,4 @@ export const fontSize = {
     xl: '3.6rem',
 }
 
-const maxWidth = '1980px'
+export const maxWidth = '1980px'

@@ -1,14 +1,14 @@
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
 import React, { useState, useEffect } from 'react'
-import { Authors, Category, Cover, Description, Flex, Section, Title, Wrapper } from './bookDescription.style'
+import { Authors, Category, Container, Cover, Description, Flex, Grid, Section, Title, Wrapper } from './bookDescription.style'
 
 function BookDescription(props) {
     const { id } = useParams()
     const [description, setDescription] = useState(0)
     const noCover = 'https://books.google.ru/googlebooks/images/no_cover_thumb.gif'
     const API_URL = 'https://www.googleapis.com/books/v1/volumes/'
-    const API_KEY = 'AIzaSyCVHiavSq2cnPNf-I2xmQIFikB89m-gkaM'
+    const API_KEY = 'AIzaSyAyWp9bHE5EvvEtUVPPlDc81aYeOTnn-wQ'
 
     useEffect(() => {
         let ignore = false
@@ -22,6 +22,7 @@ function BookDescription(props) {
         }
 
         fetchData()
+
         return () => {
             ignore = true
         }
@@ -30,26 +31,40 @@ function BookDescription(props) {
     return <>
         <Section>
             {
-                description !== 0 && <>
-                    <Flex>
-                        <Wrapper>
+                description !== 0 && 
+                <Container>
+                    <Grid>
+                        <Wrapper
+                            bgColor='light'
+                            initial={{ opacity: 0, translateX: '-100%' }}
+                            animate={{ opacity: 1, translateX: 0 }}
+                            transition={{ duration: 0.4, ease: 'circOut' }}>
                             <Cover src={ description.volumeInfo.imageLinks?.['thumbnail'] || noCover} />
                         </Wrapper>
-                        <Flex>
-                            { 
+                        <Flex column pt='lg' gap='lg' pl='lg' pr='lg' pb='lg'>
+                            {
                                 description.volumeInfo?.['categories'] &&
-                                <Category>{description.volumeInfo?.['categories'].join(', ')}</Category> 
+                                <Category
+                                    initial={{ opacity: 0, translateY: '-100%' }}
+                                    animate={{ opacity: 1, translateY: 0 }}
+                                    transition={{ duration: 0.4, ease: 'circOut' }}>
+                                    {description.volumeInfo?.['categories'].join(', ')}
+                                </Category> 
                             }
-                            <Flex>
+                            <Flex column gap='md'
+                                initial={{ opacity: 0, translateY: '100%' }}
+                                animate={{ opacity: 1, translateY: 0 }}
+                                transition={{ duration: 0.4, ease: 'circOut' }}>
                                 <Title>{ description.volumeInfo.title }</Title>
-                                { description.volumeInfo?.['authors'] && <Authors>{ description.volumeInfo?.['authors'] }</Authors> }
+                                { 
+                                    description.volumeInfo?.['authors'] && 
+                                    <Authors>{ description.volumeInfo?.['authors'].join(', ') }</Authors>
+                                }
+                                <Description dangerouslySetInnerHTML={{__html: description.volumeInfo.description }}></Description>
                             </Flex>
-                            <Wrapper>
-                                <Description>{ description.volumeInfo.description }</Description>
-                            </Wrapper>
                         </Flex>
-                    </Flex>
-                </>
+                    </Grid>
+                </Container>
             }
         </Section>
     </>

@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+import * as Constant from '../../constants'
 
 const formFieldsMixin = css({
     fontSize: '1.6rem',
@@ -6,7 +7,11 @@ const formFieldsMixin = css({
     background: '#ffffff',
     padding: '0.5rem 1rem',
     border: '1px solid darkgray',
-    borderRadius: '0.5rem'
+    borderRadius: '0.5rem',
+
+    [`@media screen and (max-width: 546px)`]: {
+        fontSize: Constant.fontSize.sm,
+    },
 })
 
 export const Form = styled.form({
@@ -14,7 +19,8 @@ export const Form = styled.form({
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
-    width: 'min-content',
+    width: '100%',
+    maxWidth: '450px',
     gap: '2.5rem',
 })
 
@@ -22,10 +28,8 @@ export const Search = styled.input.attrs({
     type: 'search',
     name: 'search-field',
     className: 'search-field',
-})({
-    minWidth: '100px',
-    maxWidth: '450px',
-    width: '450px'
+})({ 
+    width: '100%',
 }, formFieldsMixin)
 
 export const Categories = styled.select.attrs({
@@ -40,7 +44,7 @@ export const SortCase = styled.select.attrs({
 
 export const Fieldset = styled.fieldset({
     position: 'relative',
-    width: 'fit-content',
+    width: 'auto',
     height: 'fit-content',
     border: '0',
 })
@@ -51,12 +55,17 @@ export const Filler = styled.div({
 })
 
 export const Label = styled.label({
-    fontSize: '1.6rem',
+    fontSize: Constant.fontSize.md,
     fontWeight: 500,
     color: '#ffffff',
     display: 'flex',
     alignItems: 'center',
     gap: '1rem',
+
+    [`@media screen and (max-width: 546px)`]: {
+        fontSize: Constant.fontSize.sm,
+        flexDirection: 'column'
+    },
 })
 
 export const Submit = styled.button.attrs({
@@ -77,7 +86,7 @@ export const Submit = styled.button.attrs({
         transition: '0.2s all ease-in'
     },
 
-    [`&:hover path, &:focus path`]: {
+    [`&:hover path`]: {
         fill: '#8d8d8d',
         scale: '1.1',
     }

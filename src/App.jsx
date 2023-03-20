@@ -2,16 +2,11 @@ import React from 'react'
 import Header from './components/header/header'
 import Collection from './components/bookCollection/bookCollection'
 import BookDescription from './components/bookDescription/bookDesctiption'
-import { GlobalStyle } from './style'
-import { Provider } from 'react-redux'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import store from './store'
 
 function App() {
   return (
-    <Provider store={ store }>
       <BrowserRouter>
-        <GlobalStyle />
         <div>
           <Routes>
             <Route path='/' element={ <Header /> }>
@@ -21,7 +16,6 @@ function App() {
           </Routes>
         </div>
       </BrowserRouter>
-    </Provider>
   )
 }
 
